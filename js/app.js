@@ -1,6 +1,7 @@
 'use strict';
 
 let duckArray = [];
+let indexArray = [];
 
 let myContainer = document.querySelector('section');
 
@@ -47,24 +48,18 @@ function selectRandomDuckNumber() {
 }
 
 function renderDucks() {
-  // let duck1 = selectRandomDuckNumber();
-  // let duck2 = selectRandomDuckNumber();
-  // let duck3 = selectRandomDuckNumber();
-  // console.log(duck1, duck2, duck3);
 
-  let selectedImages = [];
-
-  while (selectedImages.length < 3) {
+  while (indexArray.length < 6) {
     let randomIndex = selectRandomDuckNumber();
-    if (!selectedImages.includes(randomIndex)) {
-      selectedImages.push(randomIndex);
+    if (!indexArray.includes(randomIndex)) {
+      indexArray.push(randomIndex);
     }
-    console.log(selectedImages);
+    console.log(indexArray);
   }
 
-  let imageOneIndex = selectedImages.shift();
-  let imageTwoIndex = selectedImages.shift();
-  let imageThreeIndex = selectedImages.shift();
+  let imageOneIndex = indexArray.shift();
+  let imageTwoIndex = indexArray.shift();
+  let imageThreeIndex = indexArray.shift();
 
   image1.src = duckArray[imageOneIndex].src;
   image1.alt = duckArray[imageOneIndex].name;
@@ -144,7 +139,15 @@ function renderChart() {
         {
           label: '# of Views',
           data: duckViews,
-          borderWidth: 1
+          borderWidth: 1,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)'
+          ]
         }
       ]
     },

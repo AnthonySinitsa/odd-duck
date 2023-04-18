@@ -55,15 +55,15 @@ div {
   color: rgb(16, 18, 53);
   padding: .5rem 1rem;
   border-width: 1rem;
-  width: max-content;
-  height: max-content;
+  /* width: max-content;
+  height: max-content; */
   font-size: .8rem;
   margin: 1rem;
   grid-area: 4 / 1 / 4 / 4;
 }
 
 #chart {
-  grid-area: 4 / 4 / 6 / 6;
+  grid-area: 1 / 1 / 6 / 6;
 }
 
 /* ul {
@@ -77,7 +77,7 @@ div {
   border: none;
   outline: none;
   color: #fff;
-  background: darkmagenta;
+  background: #2A2F4F;
   cursor: pointer;
   position: relative;
   z-index: 0;
