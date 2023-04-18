@@ -1,6 +1,7 @@
 'use strict';
 
 let duckArray = [];
+let indexArray = [];
 
 let myContainer = document.querySelector('section');
 
@@ -13,7 +14,7 @@ let viewResultBtn = document.querySelector('section ~ div')
 let counter = 0;
 let maxCounter = 25;
 
-function Duck(name, fileExtension = 'jpg'){
+function Duck(name, fileExtension = 'jpg') {
   this.name = name;
   this.src = `img/${name}.${fileExtension}`;
   this.views = 0;
@@ -42,29 +43,23 @@ let wineGlass = new Duck('wine-glass');
 
 duckArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 
-function selectRandomDuckNumber(){
+function selectRandomDuckNumber() {
   return Math.floor(Math.random() * duckArray.length);
 }
 
-function renderDucks(){
-  // let duck1 = selectRandomDuckNumber();
-  // let duck2 = selectRandomDuckNumber();
-  // let duck3 = selectRandomDuckNumber();
-  // console.log(duck1, duck2, duck3);
+function renderDucks() {
 
-  let selectedImages = [];
-
-  while(selectedImages.length < 3){
+  while (indexArray.length < 6) {
     let randomIndex = selectRandomDuckNumber();
-    if(!selectedImages.includes(randomIndex)){
-      selectedImages.push(randomIndex);
+    if (!indexArray.includes(randomIndex)) {
+      indexArray.push(randomIndex);
     }
-    console.log(selectedImages);
+    console.log(indexArray);
   }
 
-  let imageOneIndex = selectedImages.shift();
-  let imageTwoIndex = selectedImages.shift();
-  let imageThreeIndex = selectedImages.shift();
+  let imageOneIndex = indexArray.shift();
+  let imageTwoIndex = indexArray.shift();
+  let imageThreeIndex = indexArray.shift();
 
   image1.src = duckArray[imageOneIndex].src;
   image1.alt = duckArray[imageOneIndex].name;
@@ -75,33 +70,96 @@ function renderDucks(){
   image3.src = duckArray[imageThreeIndex].src;
   image3.alt = duckArray[imageThreeIndex].name;
   duckArray[imageThreeIndex].views++;
-  }
+}
 
-function handleDuckClick(event){
+function handleDuckClick(event) {
   counter++;
   console.log(event.target.alt);
   let clickedDuck = event.target.alt;
-  for(let i = 0; i < duckArray.length; i++){
-    if(clickedDuck === duckArray[i].name){
+  for (let i = 0; i < duckArray.length; i++) {
+    if (clickedDuck === duckArray[i].name) {
       duckArray[i].votes++;
       console.log(duckArray);
     }
   }
-  if(counter < maxCounter){
+  if (counter < maxCounter) {
     renderDucks();
-  }else {
+  } else {
     myContainer.removeEventListener('click', handleDuckClick);
     viewResultBtn.addEventListener('click', viewResults);
   }
 }
 
-function viewResults(){
-  let ul = document.querySelector('ul');
-  for(let i = 0; i < duckArray.length; i++){
-    let li = document.createElement('li');
-    li.textContent = `${duckArray[i].name} had ${duckArray[i].views} views and ${duckArray[i].votes} votes.`;
-    ul.appendChild(li);
+function viewResults() {
+  renderChart();
+  viewResultBtn.removeEventListener('click', viewResults);
+}
+
+function renderChart() {
+  console.log(duckArray);
+
+  const ctx = document.getElementById('myChart');
+
+  let duckNames = [];
+  let duckVotes = [];
+  let duckViews = [];
+
+  for (let i = 0; i < duckArray.length; i++) {
+    console.log(duckArray[i]);
+
+    let name = duckArray[i].name;
+    duckNames.push(name);
+
+    duckVotes.push(duckArray[i].votes);
+    duckViews.push(duckArray[i].views);
   }
+
+  console.log(duckNames);
+  console.log(duckVotes);
+  console.log(duckViews);
+
+  let config = {
+    type: 'bar',
+    data: {
+      labels: duckNames,
+      datasets: [
+        {
+          label: '# of Votes',
+          data: duckVotes,
+          borderWidth: 1,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)'
+          ]
+        },
+        {
+          label: '# of Views',
+          data: duckViews,
+          borderWidth: 1,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)'
+          ]
+        }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+  new Chart(ctx, config);
 }
 
 renderDucks();
