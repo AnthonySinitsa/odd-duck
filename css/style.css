@@ -39,12 +39,12 @@ section {
   grid-column-end: 6;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  /* align-items: stretch; */
 }
 
 section img {
   width: 30%;
-  max-height: 17rem;
+  max-height: 25rem;
   border: 5px solid transparent;
 }
 section img:hover {
@@ -53,13 +53,13 @@ section img:hover {
 }
 div {
   color: rgb(16, 18, 53);
-  padding: .5rem 1rem;
-  border-width: 1rem;
+  padding: .6rem 1rem;
+  /* border-width: 1rem; */
   /* width: max-content;
   height: max-content; */
-  font-size: .8rem;
-  margin: 1rem;
-  grid-area: 4 / 1 / 4 / 4;
+  /* font-size: .8rem; */
+  margin: 1.2rem;
+  grid-area: 0 / 1 / 4 / 4;
 }
 
 #chart {
@@ -79,7 +79,7 @@ div {
   color: #fff;
   background: #2A2F4F;
   cursor: pointer;
-  position: relative;
+  /* position: relative; */
   z-index: 0;
   border-radius: 10px;
 }
