@@ -1,7 +1,5 @@
 # odd-duck
 
-## lighthouse
+check it out here: [duck it](https://anthonysinitsa.github.io/odd-duck/)
 
-![accessibility](lighthouse1.png)
-![accessibility](lighthouse2.png)
-![accessibility](lighthouse3.png)
+Program that will let you vote for images and you are done voting will display a graph of all votes of each picture. 
